@@ -74,25 +74,26 @@ CesiumとNode.jsを利用した地学に役立ちそうなツールキット
 ## 開発環境構築
 
 ### 開発環境セットアップ
-
->> npm install
+```
+npm install
 //ここでエラーが出た場合
->> npm audit fix
-
+npm audit fix
+```
 #### あなたがWindowsの場合
-
+```
 mklink /D public\cesium node_modules\cesium\Build\Cesium
 C:\Users\h1\Documents\Gesium\
+```
 #### あなたがUnix系を使っている場合
-
+```
 ln -s ../node_modules/cesium/Build/Cesium public/cesium
-
+```
 これで完了です
 
 ### コマンド一覧
-
->> npm run dev #実行します
-
+```
+npm run dev #実行します
+```
 ## トラブルシューティング
 
 ### Module Not Found
