@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+<Style id="PolyStyle1">
+  <IconStyle>
+  <Icon>
+  <href>https://maps.gsi.go.jp/portal/sys/v4/symbols/080.png</href>
+  </Icon>
+  <scale>1</scale>
+  </IconStyle>
+</Style>
+<Placemark>
+<name>ここは広島城です</name>
+<styleUrl>#PolyStyle1</styleUrl>
+<Point>
+<coordinates>132.45958328247073,34.40166924076975</coordinates>
+</Point>
+</Placemark>
+<Placemark>
+<name>ここはひろしますてーしょんです</name>
+<styleUrl>#PolyStyle1</styleUrl>
+<Point>
+<coordinates>132.47584819793704,34.397738713557224</coordinates>
+</Point>
+</Placemark>
+</Document>
+</kml>
