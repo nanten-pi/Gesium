@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div id="top"></div>
 
-## Getting Started
+## 使用技術一覧
 
-First, run the development server:
+<!-- シールド一覧 -->
+<!-- 該当するプロジェクトの中から任意のものを選ぶ-->
+<p style="display: inline">
+  <!-- フロントエンドのフレームワーク一覧 -->
+  <img src="https://img.shields.io/badge/-Node.js-000000.svg?logo=node.js&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Next.js-000000.svg?logo=next.js&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-TailwindCSS-000000.svg?logo=tailwindcss&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-React-20232A?style=for-the-badge&logo=react&logoColor=61DAF">
+  <!-- インフラ一覧 -->
+  <img src="https://img.shields.io/badge/-githubactions-FFFFFF.svg?logo=github-actions&style=for-the-badge">
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 目次
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. [プロジェクトについて](#プロジェクトについて)
+2. [環境](#環境)
+3. [ディレクトリ構成](#ディレクトリ構成)
+4. [開発環境構築](#開発環境構築)
+5. [トラブルシューティング](#トラブルシューティング)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## プロジェクト名
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Gesium
 
-## Learn More
+<!-- プロジェクトについて -->
 
-To learn more about Next.js, take a look at the following resources:
+## プロジェクトについて
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+CesiumとNode.jsを利用した地学に役立ちそうなツールキット
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<!-- プロジェクトの概要を記載 -->
+<!--
+  <p align="left">
+    <br />
+    <!-- プロジェクト詳細にWikiのリンク 
+    <a href="Backlogのwikiリンク"><strong>プロジェクト詳細 »</strong></a>
+    <br />
+    <br />
+<p align="right">(<a href="#top">トップへ</a>)</p>
+-->
+## 環境
 
-## Deploy on Vercel
+<!-- 言語、フレームワーク、ミドルウェア、インフラの一覧とバージョンを記載 -->
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| 言語・フレームワーク  | バージョン |
+| --------------------- | ---------- |
+| Node.js               | 18.18.0   |
+| React                 | 18.2.0     |
+| Next.js               | 14.2.15     |
+| Cesium                | 1.98.1     |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+その他のパッケージのバージョンは package.json を参照してください
+
+<p align="right">(<a href="#top">トップへ</a>)</p>
+
+## ディレクトリ構成
+
+<!-- Treeコマンドを使ってディレクトリ構成を記載 -->
+├── data
+├── pages
+├── public
+|   ├── cesium
+├── src
+|   ├── MapLayer
+|   ├── Setting
+|   ├── Temp
+
+<p align="right">(<a href="#top">トップへ</a>)</p>
+
+## 開発環境構築
+
+### 開発環境セットアップ
+
+>> npm install
+//ここでエラーが出た場合
+>> npm audit fix
+
+#### あなたがWindowsの場合
+
+mklink /D public\cesium node_modules\cesium\Build\Cesium
+C:\Users\h1\Documents\Gesium\
+#### あなたがUnix系を使っている場合
+
+ln -s ../node_modules/cesium/Build/Cesium public/cesium
+
+これで完了です
+
+### コマンド一覧
+
+>> npm run dev #実行します
+
+## トラブルシューティング
+
+### Module Not Found
+
+Gesiumのrootディレクトリでnpm installを実行
+
+<p align="right">(<a href="#top">トップへ</a>)</p>
