@@ -79,11 +79,14 @@ npm install
 //ここでエラーが出た場合
 npm audit fix
 ```
+
+続いてのコマンドは
+
 #### あなたがWindowsの場合
 ```
-mklink /D public\cesium node_modules\cesium\Build\Cesium
-C:\Users\h1\Documents\Gesium\
+mklink /D "GesiumをインストールしたディレクトリのパスをC:から置き換えてください"\public\cesium "GesiumをインストールしたディレクトリのパスをC:から置き換えてください"\node_modules\cesium\Build\Cesium
 ```
+
 #### あなたがUnix系を使っている場合
 ```
 ln -s ../node_modules/cesium/Build/Cesium public/cesium
