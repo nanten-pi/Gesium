@@ -10,10 +10,7 @@ import { PlateauOrtho } from './MapLayer/PlateauOrtho'
 import { GeologicalSurveyData } from './MapLayer/GeologicalSurveyData'
 import { HazardMapData } from './MapLayer/HazardMapData'
 import { PlateauTerrain } from './Setting/PlateauTerrain'
-import { PlateauModelLatest } from './PlateauModelLatest'
 import {OpenChiriinchizu} from './MapLayer/OpenChiriinchizu'
-import { Pointer,PointerProps} from './Pointer'
-import { JsoWriter } from './JsoWriter'
 import {
   Box,
   AppBar as MuiAppBar,
@@ -40,8 +37,6 @@ import { Outlet} from 'react-router-dom';
 import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
 import { Menu as MenuIcon, ChevronLeft as ChevronLeftIcon, Close as CloseIcon } from "@mui/icons-material";
 import { Button, SelectChangeEvent, CssBaseline } from '@mui/material';
-import { Liner } from './Liner'
-import { JsoLineWriter } from './JsoLineWriter'
 import { Denshikokudokihonzu } from './MapLayer/Denshikokudokihonzu'
 import { TempOrthoLoader } from './MapLayer/TempOrthoLoader'
 
@@ -93,40 +88,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     },
   }),
 );
-
-const hazard_dosekiryu = "https://disaportaldata.gsi.go.jp/raster/05_dosekiryukeikaikuiki_data/34/{z}/{x}/{y}.png";
-const hazard_sinsui_kuni = "https://disaportaldata.gsi.go.jp/raster/01_flood_l2_shinsuishin_pref_data/34/{z}/{x}/{y}.png";
-const hazard_sinsui_ken = "https://disaportaldata.gsi.go.jp/raster/01_flood_l1_shinsuishin_newlegend_pref_data/34/{z}/{x}/{y}.png";
-const hazard_sinsui_kuni_jikan ="https://disaportaldata.gsi.go.jp/raster/01_flood_l2_keizoku_pref_data/34/{z}/{x}/{y}.png";
-const hazard_sinsui_kaoku = "https://disaportaldata.gsi.go.jp/raster/01_flood_l2_kaokutoukai_hanran_pref_data/34/{z}/{x}/{y}.png"
-const hazard_naisui = "https://disaportaldata.gsi.go.jp/raster/02_naisui_pref_data/34/{z}/{x}/{y}.png";
-const hazard_tunami = "https://disaportaldata.gsi.go.jp/raster/04_tsunami_newlegend_pref_data/34/{z}/{x}/{y}.png";
-const hazard_kyushakeichi ="https://disaportaldata.gsi.go.jp/raster/05_kyukeishakeikaikuiki_data/34/{z}/{x}/{y}.png";
-const hazard_jisuberi = "https://disaportaldata.gsi.go.jp/raster/05_jisuberikeikaikuiki_data/34/{z}/{x}/{y}.png";
-const hazard_nadare = "https://disaportaldata.gsi.go.jp/raster/05_nadarekikenkasyo_data/34/{z}/{x}/{y}.png";
-const chirinchizu_ortho ="https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png";
-const plateau_ortho ="https://api.plateauview.mlit.go.jp/tiles/plateau-ortho-2023/{z}/{x}/{y}.png";
 const mdTheme = createTheme();
 //ここからメインプログラム
 export const App: React.FC = () => {
-
-  interface ListItem {
-    id: number;
-    name: string;
-    longitude: number;
-    latitude: number;
-    altitude: number;
-    longitude1: number;
-    latitude1: number;
-    altitude1: number;
-    longitude2: number;
-    latitude2: number;
-    altitude2: number;
-  }
-  //pin機能用
-  const [lists, setLists] = useState<any[]>([]);
-  const [liners, setLiners] = useState<any[]>([]);
-  //hazardマップ
   const [hazard, setHazard] = useState<string>('https://disaportaldata.gsi.go.jp/raster/04_tsunami_newlegend_pref_data/34/{z}/{x}/{y}.png');
   //オルソ
   const [ortho, setOrtho] = useState<string>('https://api.plateauview.mlit.go.jp/tiles/plateau-ortho-2023/{z}/{x}/{y}.png');
@@ -150,84 +114,6 @@ export const App: React.FC = () => {
   };
 
   const [checked, setChecked] = React.useState<boolean[]>(Array(6).fill(false));
-
-  const handleChange0 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newChecked = [...checked];
-    newChecked[0] = event.target.checked;
-    setChecked(newChecked);
-    if (newChecked[0] === true) {
-      setOrtho(plateau_ortho);
-    }
-  };
-
-  const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newChecked = [...checked];
-    newChecked[1] = event.target.checked;
-    setChecked(newChecked);
-    if (newChecked[1] === true) {
-      setOrtho(chirinchizu_ortho);
-    }
-  };
-
-  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newChecked = [...checked];
-    newChecked[2] = event.target.checked;
-    setChecked(newChecked);
-    if (newChecked[2] === true) {
-      setHazard(hazard_sinsui_kuni);
-    }
-  };
-
-  const handleChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newChecked = [...checked];
-    newChecked[3] = event.target.checked;
-    setChecked(newChecked);
-    if (newChecked[3] === true) {
-      setHazard(hazard_sinsui_kuni_jikan);
-    }
-  };
-
-  const handleChange4 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newChecked = [...checked];
-    newChecked[4] = event.target.checked;
-    setChecked(newChecked);
-    if (newChecked[4] === true) {
-      setHazard(hazard_dosekiryu);
-    }
-  };
-
-  const handleChange5 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newChecked = [...checked];
-    newChecked[5] = event.target.checked;
-    setChecked(newChecked);
-    if (newChecked[5] === true) {
-      setHazard(hazard_tunami);
-    }
-  };
-  //これはAPIのやつ（pin機能）
-  useEffect(() => {
-    const fetchData = async (url: string, setState: React.Dispatch<React.SetStateAction<any>>) => {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-          console.log(data);
-          setState(data.lists || data.liners); // APIのデータをStateにセット/ ローディング状態を解除
-      } catch (error) {
-          console.error('Error fetching data:', error);
-      }
-    };
-
-    const intervalId = setInterval(() => {
-      fetchData('http://localhost:3001/lists', setLists);
-      fetchData('http://localhost:3001/lists2', setLiners);
-    }, 5000); // 30秒ごとにデータを取得
-
-    // コンポーネントのアンマウント時にインターバルをクリア
-    return () => clearInterval(intervalId);
-  }, []);
   useEffect(() => {
     // hazard の値が変わったときに実行される処理
     console.log('Hazard URL updated:', hazard);
@@ -262,7 +148,7 @@ export const App: React.FC = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              検証用アプリ
+              Gesium
             </Typography>
           </Toolbar>
         </AppBar>
@@ -288,25 +174,6 @@ export const App: React.FC = () => {
               ハンバーガーメニュー
             </Typography>
           </Toolbar>
-          <Divider />
-          <Divider />
-          <Typography variant="h4" gutterBottom>オルソ画像選択</Typography>
-          <Divider />
-          <FormGroup>
-            <FormControlLabel control={<Checkbox checked={checked[0]} onChange={handleChange0} />} label="PLATEAU地図" />
-            <FormControlLabel control={<Checkbox checked={checked[1]} onChange={handleChange1} />} label="地理院地図" />
-          </FormGroup>
-          <Divider />
-          <Divider />
-          <Typography variant="h4" gutterBottom>ハザードマップ切り替え</Typography>
-          <Divider />
-          <FormGroup>
-            <FormControlLabel control={<Checkbox checked={checked[2]} onChange={handleChange2} />} label="浸水" />
-            <FormControlLabel control={<Checkbox checked={checked[3]} onChange={handleChange3} />} label="浸水時間" />
-            <FormControlLabel control={<Checkbox checked={checked[4]} onChange={handleChange4} />} label="土石流" />
-            <FormControlLabel control={<Checkbox checked={checked[5]} onChange={handleChange5} />} label="津波" />
-          </FormGroup>
-          <Divider />
         </Drawer>
         <Box
           component="main"
@@ -322,37 +189,11 @@ export const App: React.FC = () => {
         >
           <Toolbar />
           <Viewer>
-            {lists.map((list) => (
-              <Pointer
-                key={list.id}
-                longitude={list.longitude}
-                latitude={list.latitude}
-                altitude={list.altitude}
-                names={list.name}
-              />
-            ))}
-            {liners.map((liner) => (
-              <Liner
-                key={liner.id}
-                longitude1={liner.longitude1}
-                latitude1={liner.latitude1}
-                altitude1={liner.altitude1}
-                longitude2={liner.longitude2}
-                latitude2={liner.latitude2}
-                altitude2={liner.altitude2}
-                names={liner.name}
-              />
-            ))}
             <Camera />
             <Clock />
             <Lighting />
             <PlateauTerrain />
-            <TempOrthoLoader path={ortho} />
-            <JsoWriter />
-            <HazardMapData path={hazard} />
-            <PlateauModelLatest path='https://assets.cms.plateau.reearth.io/assets/cb/7bac72-24c1-4901-b1f4-9373e2feb738/34100_hirosima-shi_city_2022_citygml_3_op_bldg_3dtiles_34102_higashi-ku_lod2' />
-            <PlateauModelLatest path='https://assets.cms.plateau.reearth.io/assets/5d/e5c519-682e-43fc-9bbb-744b8dd665ba/34100_hirosima-shi_city_2022_citygml_3_op_bldg_3dtiles_34103_minami-ku_lod2' />
-            <PlateauModelLatest path='https://assets.cms.plateau.reearth.io/assets/a6/2ab468-91d9-4f5b-bdb2-058037d6e257/34100_hirosima-shi_city_2022_citygml_3_op_bldg_3dtiles_34105_asaminami-ku_lod1' />
+            <GeologicalSurveyData />
           </Viewer>
         </Box>
       </Box>
